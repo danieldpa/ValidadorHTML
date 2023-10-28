@@ -24,7 +24,7 @@ public class Tag {
 	}
 	
 	public String toString() {
-		return "Tag: " + nome + "\n" + 
-				"Count: " + count + "\n"; 
+		return "Tag: " + nome + " "+ 
+				"Count: " + count; 
 	}
 }

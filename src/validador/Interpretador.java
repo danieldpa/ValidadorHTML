@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 
 public class Interpretador {
 	private String file;
