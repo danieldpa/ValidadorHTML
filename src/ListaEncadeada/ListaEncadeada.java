@@ -94,9 +94,9 @@ public class ListaEncadeada<T> {
 		NoLista<T> p = getPrimeiro();
 
 		while (p != null) {
-			resultado += p.getInfo();
+			resultado += p.getInfo().toString();
 			if (p.getProximo() != null) {
-				resultado += ", "; 
+				resultado += "\n"; 
 			}
 			p = p.getProximo();
 		}
