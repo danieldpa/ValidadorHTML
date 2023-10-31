@@ -55,19 +55,23 @@ public class Interpretador {
 		boolean foundTagInit = false;
 		boolean foundTagClose = false;
 		boolean hasAttributes = false;
+		boolean closedTagInit = false;
 		String tagName = "";
 		
 		int newLines = 1;
 		int characters = 0;
 		
 		for(int i = 0; i < file.length(); i++) {
-			if ("\n".equals(file.substring(i, i + 1))) {
+			String sub = file.substring(i, i + 1);
+			
+			if ("\n".equals(sub)) {
 				newLines++;
 				characters = 0;
+				
 			}else {
 				characters++;
 				if (foundTagInit) {
-					if (">".equals(file.substring(i, i + 1))) {
+					if (">".equals(sub)) {
 						if (foundTagClose) {
 							String ultimaTag = pilha.peek();
 							
@@ -87,6 +91,7 @@ public class Interpretador {
 							boolean achou = false;
 							for(int j = 0; j < tags.obterComprimento(); j++) {
 								Tag no = tags.obterNo(j).getInfo();
+								
 								if (tagName.equals(no.getNome())) {
 									no.setCount(no.getCount() + 1);
 									achou = true;
@@ -100,20 +105,23 @@ public class Interpretador {
 						foundTagInit = false;
 						hasAttributes = false;
 					}
-					else if ("/".equals(file.substring(i, i + 1))) {
+					else if ("/".equals(sub) && closedTagInit) {
 						foundTagClose = true;
 					}
 					
-					else if (" ".equals(file.substring(i, i + 1))) {
+					else if (" ".equals(sub)) {
 						hasAttributes = true;
 					}
 						
 					else if (!hasAttributes){
-						tagName += file.substring(i, i + 1);
+						tagName += sub;
 					}
+
+				closedTagInit = false;
 				}else {
-					if ("<".equals(file.substring(i, i + 1))) {
+					if ("<".equals(sub)) {
 						foundTagInit = true;
+						closedTagInit = true;
 						tagName = "";
 					}
 				}
