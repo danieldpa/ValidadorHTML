@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.table.AbstractTableModel;
 
+import ListaEncadeada.ListaEncadeada;
 import validador.Tag;
 
 public class TagTableModel extends AbstractTableModel {
@@ -10,18 +11,18 @@ public class TagTableModel extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String[] colunas;
-	private Tag[] tags;
+	private ListaEncadeada<Tag> tags;
 	public static final int TAG = 0;
 	public static final int COUNT = 1;
 	
-	public TagTableModel(Tag[] tags) {
+	public TagTableModel(ListaEncadeada<Tag> tags) {
 		super();
 		colunas = new String[] {"Tag", "Número de ocorrências"};
 		this.tags = tags;
 	}
 	
 	private void verifyRowIndex(int rowIndex) {
-		int length = tags.length;
+		int length = tags.obterComprimento();
 		if (rowIndex >= length || rowIndex < 0) {
 			throw new IndexOutOfBoundsException("Row index " + rowIndex + " out of bounds for length " + length);
 		}
@@ -40,7 +41,7 @@ public class TagTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return tags.length;
+		return tags.obterComprimento();
 	}
 
 	@Override
@@ -53,9 +54,9 @@ public class TagTableModel extends AbstractTableModel {
 		verifyIndex(rowIndex, columnIndex);
 		switch (columnIndex) {
 		case TAG:
-			return tags[rowIndex].getNome();
+			return tags.obterNo(rowIndex).getInfo().getNome();
 		case COUNT:
-			return tags[rowIndex].getCount();
+			return tags.obterNo(rowIndex).getInfo().getCount();
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + columnIndex);
 		}
