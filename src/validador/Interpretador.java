@@ -64,18 +64,18 @@ public class Interpretador {
 		for(int i = 0; i < file.length(); i++) {
 			String sub = file.substring(i, i + 1);
 			
-			if ("\n".equals(sub)) {
+			if ("\n".equalsIgnoreCase(sub)) {
 				newLines++;
 				characters = 0;
 				
 			}else {
 				characters++;
 				if (foundTagInit) {
-					if (">".equals(sub)) {
+					if (">".equalsIgnoreCase(sub)) {
 						if (foundTagClose) {
 							String ultimaTag = pilha.peek();
 							
-							if (ultimaTag.equals(tagName)) {
+							if (ultimaTag.equalsIgnoreCase(tagName)) {
 								pilha.pop();
 							}
 							else {
@@ -92,7 +92,7 @@ public class Interpretador {
 							for(int j = 0; j < tags.obterComprimento(); j++) {
 								Tag no = tags.obterNo(j).getInfo();
 								
-								if (tagName.equals(no.getNome())) {
+								if (tagName.equalsIgnoreCase(no.getNome())) {
 									no.setCount(no.getCount() + 1);
 									achou = true;
 								}
@@ -105,11 +105,11 @@ public class Interpretador {
 						foundTagInit = false;
 						hasAttributes = false;
 					}
-					else if ("/".equals(sub) && closedTagInit) {
+					else if ("/".equalsIgnoreCase(sub) && closedTagInit) {
 						foundTagClose = true;
 					}
 					
-					else if (" ".equals(sub)) {
+					else if (" ".equalsIgnoreCase(sub)) {
 						hasAttributes = true;
 					}
 						
@@ -119,7 +119,7 @@ public class Interpretador {
 
 				closedTagInit = false;
 				}else {
-					if ("<".equals(sub)) {
+					if ("<".equalsIgnoreCase(sub)) {
 						foundTagInit = true;
 						closedTagInit = true;
 						tagName = "";

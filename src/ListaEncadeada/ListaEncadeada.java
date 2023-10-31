@@ -90,18 +90,18 @@ public class ListaEncadeada<T> {
 
 	@Override
 	public String toString() {
-		String resultado = "";
+		String resultado = "\"";
 		NoLista<T> p = getPrimeiro();
 
 		while (p != null) {
 			resultado += p.getInfo().toString();
 			if (p.getProximo() != null) {
-				resultado += " "; 
+				resultado += "\", \""; 
 			}
 			p = p.getProximo();
 		}
 
-		return resultado;
+		return resultado + "\"";
 	}
 
 }
