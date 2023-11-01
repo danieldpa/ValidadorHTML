@@ -63,7 +63,7 @@ public class Main extends JFrame {
 	}
 	
 	private void selecionarArquivo() {
-		JFileChooser fc = new JFileChooser();
+		JFileChooser fc = new JFileChooser("../ValidadorHTML");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("HTML file (*.html)", "html");
 		fc.setFileFilter(filter);
 		fc.setAcceptAllFileFilterUsed(false);
