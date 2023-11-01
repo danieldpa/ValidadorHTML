@@ -13,18 +13,22 @@ public class Interpretador {
 	private PilhaLista<String> pilha;
 	private boolean valido;
 	
-	public Interpretador(String path) throws IOException, HTMLSyntaxException {
+	public Interpretador(String path) throws IOException, HTMLSyntaxException, HTMLInvalidFile {
 		pilha = new PilhaLista<String>();
 		tags = new ListaEncadeada<Tag>();
 		analisar(path);
 	}
 	
-	private void lerArquivo(String path) throws IOException {
+	private void lerArquivo(String path) throws IOException, HTMLInvalidFile {
+		if (!path.substring(path.length() - 5, path.length()).equalsIgnoreCase(".html")) {
+			throw new HTMLInvalidFile(path);
+		}
+		
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		file = new String(encoded, Charset.defaultCharset());
 	}
 	
-	private void analisar(String path) throws IOException, HTMLSyntaxException {
+	private void analisar(String path) throws IOException, HTMLSyntaxException, HTMLInvalidFile {
 		lerArquivo(path);
 		lerTodasTags();
 		

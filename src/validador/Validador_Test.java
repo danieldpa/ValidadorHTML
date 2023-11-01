@@ -13,8 +13,8 @@ class Validador_Test {
 	void test() {
 		Interpretador inter = null;
 		try {
-			inter = new Interpretador("index.html");
-		} catch (IOException | HTMLSyntaxException e) {
+			inter = new Interpretador("index.htl");
+		} catch (IOException | HTMLSyntaxException | HTMLInvalidFile e) {
 			e.printStackTrace();
 		}
 	}
