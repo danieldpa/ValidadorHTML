@@ -2,6 +2,8 @@ package validador;
 
 import ListaEncadeada.ListaEncadeada;
 import Pilha.PilhaLista;
+import ordenacoes.OrdenacaoQuickSort;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -144,4 +146,24 @@ public class Interpretador {
 	public ListaEncadeada<Tag> getTags(){
 		return tags;
 	}
+
+	public Tag[] converterVetor() {
+		Tag[] tagsVetor = new Tag[tags.obterComprimento()];
+
+		for (int i = 0; i < tags.obterComprimento(); i++) {
+			Tag tag = tags.obterNo(i).getInfo();
+			tagsVetor[i] = tag;
+		}
+
+		return tagsVetor;
+	}
+	
+	public Tag[] ordenar() {
+        Tag[] tagsVetor = converterVetor();
+        OrdenacaoQuickSort<Tag> QuickSort = new OrdenacaoQuickSort<Tag>(); 
+        QuickSort.setInfo(tagsVetor);
+        
+        return QuickSort.ordernar();
+    }
+	
 }

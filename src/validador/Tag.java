@@ -1,6 +1,6 @@
 package validador;
 
-public class Tag {
+public class Tag  implements Comparable<Tag>{
 	private String nome;
 	private int count;
 	
@@ -27,4 +27,15 @@ public class Tag {
 		return "Tag: \"" + nome + "\" "+ 
 				"Count: " + count; 
 	}
+
+	@Override
+    public int compareTo(Tag o) {
+		
+        int resultado = Integer.compare(this.count, o.count);
+        if (resultado != 0) {
+            return resultado;
+        }
+
+        return this.nome.compareTo(o.nome);
+    }
 }
