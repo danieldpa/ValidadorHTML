@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import ListaEncadeada.ListaEncadeada;
+import validador.HTMLInvalidFile;
 import validador.HTMLSyntaxException;
 import validador.Interpretador;
 import validador.Tag;
@@ -84,11 +85,13 @@ public class Main extends JFrame {
 			tableModel = new TagTableModel(tags);
 			table.setModel(tableModel);	
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(this, "Ocorreu um erro ao importar o arquivo", "ERRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Ocorreu um erro ao tentar abrir o arquivo.", "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (HTMLInvalidFile e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		} catch (HTMLSyntaxException e) {
 			textArea.setText(e.getMessage());
 			table.setModel(new DefaultTableModel());
-		}
+		} 
 	}
 
 	/**
