@@ -162,8 +162,9 @@ public class Interpretador {
         Tag[] tagsVetor = converterVetor();
         OrdenacaoQuickSort<Tag> QuickSort = new OrdenacaoQuickSort<Tag>(); 
         QuickSort.setInfo(tagsVetor);
+        QuickSort.ordernar();
         
-        return QuickSort.ordernar();
+        return QuickSort.getInfo();
     }
 	
 }
