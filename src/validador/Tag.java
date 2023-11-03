@@ -29,13 +29,11 @@ public class Tag  implements Comparable<Tag>{
 	}
 
 	@Override
-    public int compareTo(Tag o) {
-		
-        int resultado = Integer.compare(this.count, o.count);
+    public int compareTo(Tag o) {	
+        int resultado = Integer.compare(o.count, this.count);
         if (resultado != 0) {
             return resultado;
         }
-
         return this.nome.compareTo(o.nome);
     }
 }

@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import ListaEncadeada.ListaEncadeada;
 import validador.HTMLInvalidFile;
 import validador.HTMLSyntaxException;
 import validador.Interpretador;
@@ -81,7 +80,8 @@ public class Main extends JFrame {
 		try {
 			Interpretador interpretador = new Interpretador(path);
 			textArea.setText("O arquivo está bem formatado.");
-			ListaEncadeada<Tag> tags = interpretador.getTags();
+			
+			Tag[] tags =  interpretador.getTags();
 			tableModel = new TagTableModel(tags);
 			table.setModel(tableModel);	
 		} catch (IOException e) {

@@ -1,6 +1,7 @@
 package validador;
 
 import ListaEncadeada.ListaEncadeada;
+import ListaEncadeada.NoLista;
 import Pilha.PilhaLista;
 import ordenacoes.OrdenacaoQuickSort;
 
@@ -142,29 +143,25 @@ public class Interpretador {
 	public boolean isValido() {
 		return valido;
 	}
-	
-	public ListaEncadeada<Tag> getTags(){
-		return tags;
-	}
 
 	private Tag[] converterVetor() {
 		Tag[] tagsVetor = new Tag[tags.obterComprimento()];
-
-		for (int i = 0; i < tags.obterComprimento(); i++) {
-			Tag tag = tags.obterNo(i).getInfo();
-			tagsVetor[i] = tag;
+		NoLista<Tag> p = tags.getPrimeiro();
+		for (int i = 0; i < tagsVetor.length; i++) {
+			tagsVetor[i] = p.getInfo();
+			p = p.getProximo();
 		}
 
 		return tagsVetor;
 	}
 	
-	public Tag[] ordenar() {
+	public Tag[] getTags() {
         Tag[] tagsVetor = converterVetor();
-        OrdenacaoQuickSort<Tag> QuickSort = new OrdenacaoQuickSort<Tag>(); 
-        QuickSort.setInfo(tagsVetor);
-        QuickSort.ordernar();
+        OrdenacaoQuickSort<Tag> quickSort = new OrdenacaoQuickSort<Tag>(); 
+        quickSort.setInfo(tagsVetor);
+        quickSort.ordernar();
         
-        return QuickSort.getInfo();
+        return quickSort.getInfo();
     }
 	
 }

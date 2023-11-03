@@ -1,6 +1,4 @@
 package validador;
-
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
@@ -18,7 +16,7 @@ class Validador_Test {
 			e.printStackTrace();
 		}
 		
-		Tag[] vetor = inter.ordenar();
+		Tag[] vetor = inter.getTags();
 		for (Tag t : vetor) {
 	        System.out.println(t.toString());
 	    }

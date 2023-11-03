@@ -3,6 +3,7 @@ package ListaEncadeada;
 public class ListaEncadeada<T> {
 
 	private NoLista<T> primeiro;
+	private int tamanho;
 
 	public ListaEncadeada() {
 		this.primeiro = null;
@@ -17,6 +18,7 @@ public class ListaEncadeada<T> {
 		no.setInfo(info);
 		no.setProximo(getPrimeiro());
 		this.primeiro = no;
+		tamanho++;
 	}
 
 	public boolean estaVazia() {
@@ -50,6 +52,7 @@ public class ListaEncadeada<T> {
 		}
 
 		if (p != null) {
+			tamanho--;
 			if (p == primeiro) {
 				this.primeiro = p.getProximo();
 			} else {
