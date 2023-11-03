@@ -147,7 +147,7 @@ public class Interpretador {
 		return tags;
 	}
 
-	public Tag[] converterVetor() {
+	private Tag[] converterVetor() {
 		Tag[] tagsVetor = new Tag[tags.obterComprimento()];
 
 		for (int i = 0; i < tags.obterComprimento(); i++) {

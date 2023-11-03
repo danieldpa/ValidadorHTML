@@ -13,15 +13,22 @@ class Validador_Test {
 	void test() {
 		Interpretador inter = null;
 		try {
-			inter = new Interpretador("index.htl");
+			inter = new Interpretador("texto.html");
 		} catch (IOException | HTMLSyntaxException | HTMLInvalidFile e) {
 			e.printStackTrace();
 		}
+		
+		Tag[] vetor = inter.ordenar();
+		for (Tag t : vetor) {
+	        System.out.println(t.toString());
+	    }
+		
+		assertEquals(true, inter.isValido());
 	}
 	
 //	void testArquivoCorreto() {
 //		Interpretador inter = null;
-//		try {
+//		try{
 //			inter = new Interpretador("texto.html");
 //		} catch (IOException | HTMLSyntaxException e) {
 //			e.printStackTrace();
@@ -32,7 +39,7 @@ class Validador_Test {
 //		assertEquals(true, inter.isValido());
 //		assertEquals(tag, inter.getTags().toString());
 //	}
-//	
+	
 //	@Test
 //	void testComSingleton() {
 //		Interpretador inter = null;
