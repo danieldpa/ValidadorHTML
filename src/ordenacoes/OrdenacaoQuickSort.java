@@ -1,6 +1,6 @@
 package ordenacoes;
 
-public class OrdenacaoQuickSort<E extends Comparable<E>> extends OrdenacaoAbstract<E>{
+public class OrdenacaoQuickSort<E extends Comparable<E>> extends OrdenacaoAbstract<E> {
 
 	@Override
 	public void ordernar() {
