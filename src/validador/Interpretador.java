@@ -1,7 +1,6 @@
 package validador;
 
 import ListaEncadeada.ListaEncadeada;
-import ListaEncadeada.NoLista;
 import Pilha.PilhaLista;
 import ordenacoes.OrdenacaoQuickSort;
 
@@ -96,11 +95,10 @@ public class Interpretador {
 							}
 		
 							boolean achou = false;
-							for(int j = 0; j < tags.obterComprimento(); j++) {
-								Tag no = tags.obterNo(j).getInfo();
+							for (Tag tag : tags) {
 								
-								if (tagName.equalsIgnoreCase(no.getNome())) {
-									no.setCount(no.getCount() + 1);
+								if (tagName.equalsIgnoreCase(tag.getNome())) {
+									tag.setCount(tag.getCount() + 1);
 									achou = true;
 								}
 							}
@@ -146,12 +144,11 @@ public class Interpretador {
 
 	private Tag[] converterVetor() {
 		Tag[] tagsVetor = new Tag[tags.obterComprimento()];
-		NoLista<Tag> p = tags.getPrimeiro();
-		for (int i = 0; i < tagsVetor.length; i++) {
-			tagsVetor[i] = p.getInfo();
-			p = p.getProximo();
+		int i = 0;
+		for (Tag tag : tags) {
+			tagsVetor[i] = tag;
+			i++;
 		}
-
 		return tagsVetor;
 	}
 	

@@ -1,6 +1,8 @@
 package ListaEncadeada;
 
-public class ListaEncadeada<T> {
+import java.util.Iterator;
+
+public class ListaEncadeada<T> implements Iterable<T>{
 
 	private NoLista<T> primeiro;
 	private int tamanho;
@@ -106,5 +108,23 @@ public class ListaEncadeada<T> {
 
 		return resultado + "\"";
 	}
+	
+	@Override
+	public Iterator<T> iterator() {
+		return new Iterator<T>() {
+			private NoLista<T> atual = primeiro;
+			
+			@Override
+			public boolean hasNext() {
+				return atual != null;
+			}
 
+			@Override
+			public T next() {
+				T info = atual.getInfo();
+				atual = atual.getProximo();
+				return info;
+			}
+		};
+	}
 }
