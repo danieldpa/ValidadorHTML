@@ -20,8 +20,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
+import java.awt.Window.Type;
 
-public class DialogDigitar extends JFrame {
+public class FrameDigitar extends JFrame {
 
 	/**
 	 * 
@@ -42,7 +43,7 @@ public class DialogDigitar extends JFrame {
 	/**
 	 * Create the dialog.
 	 */
-	public DialogDigitar(JFrame frame) {
+	public FrameDigitar(JFrame frame) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

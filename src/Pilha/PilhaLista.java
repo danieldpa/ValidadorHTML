@@ -1,6 +1,6 @@
-package Pilha;
+package pilha;
 
-import ListaEncadeada.ListaEncadeada;
+import listaEncadeada.ListaEncadeada;
 
 public class PilhaLista<T> implements Pilha<T> {
 

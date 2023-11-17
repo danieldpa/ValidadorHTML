@@ -1,4 +1,4 @@
-package Pilha;
+package pilha;
 
 public class NoLista<T> {
 

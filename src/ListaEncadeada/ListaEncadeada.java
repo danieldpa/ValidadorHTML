@@ -1,4 +1,4 @@
-package ListaEncadeada;
+package listaEncadeada;
 
 import java.util.Iterator;
 

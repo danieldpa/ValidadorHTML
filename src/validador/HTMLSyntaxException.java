@@ -1,6 +1,6 @@
 package validador;
 
-import Pilha.PilhaLista;
+import pilha.PilhaLista;
 
 public class HTMLSyntaxException extends Exception {
 	

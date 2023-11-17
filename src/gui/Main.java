@@ -120,7 +120,7 @@ public class Main extends JFrame {
 	}
 	
 	private void digitar() {
-		DialogDigitar dialog = new DialogDigitar(this);
+		FrameDigitar dialog = new FrameDigitar(this);
 		dialog.setVisible(true);
 		dialog.addWindowListener(new WindowAdapter() {
 			@Override

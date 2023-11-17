@@ -1,8 +1,7 @@
 package validador;
 
-import ListaEncadeada.ListaEncadeada;
-import Pilha.PilhaLista;
-import arvore.Arvore;
+import listaEncadeada.ListaEncadeada;
+import pilha.PilhaLista;
 import ordenacoes.OrdenacaoQuickSort;
 
 import java.io.*;
@@ -14,13 +13,11 @@ public class Interpretador {
 	private String file;
 	private ListaEncadeada<Tag> tags;
 	private PilhaLista<String> pilha;
-	private Arvore<String> arvore;
 	private boolean valido;
 	
 	public Interpretador() {
 		pilha = new PilhaLista<String>();
 		tags = new ListaEncadeada<Tag>();
-		arvore = new Arvore<String>();
 	}
 	
 	private void lerArquivo(String path) throws IOException, HTMLInvalidFile {
@@ -169,9 +166,4 @@ public class Interpretador {
         
         return quickSort.getInfo();
     }
-	
-	public Arvore<String> getArvore() {
-		return arvore;
-	}
-	
 }
