@@ -20,7 +20,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
-import java.awt.Window.Type;
 
 public class FrameDigitar extends JFrame {
 
