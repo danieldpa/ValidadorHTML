@@ -21,7 +21,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 
-public class DialogDigitar extends JDialog {
+public class DialogDigitar extends JFrame {
 
 	/**
 	 * 
@@ -73,8 +73,9 @@ public class DialogDigitar extends JDialog {
 				JTextArea textArea = new JTextArea();
 				textArea.addKeyListener(new KeyAdapter() {
 					@Override
-					public void keyTyped(KeyEvent e) {
+					public void keyReleased(KeyEvent e) {
 						text = textArea.getText();
+						
 					}
 				});
 				scrollPane.setViewportView(textArea);
