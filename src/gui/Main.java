@@ -23,6 +23,8 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
@@ -45,6 +47,7 @@ public class Main extends JFrame {
 	private JPanel panel02;
 	private JButton btnSelecionar;
 	private JScrollPane scrollPane01;
+	private JButton btnDigitar;
 
 	/**
 	 * Launch the application.
@@ -72,18 +75,23 @@ public class Main extends JFrame {
 			File file = fc.getSelectedFile();
 			String url = file.getAbsolutePath();
 			tfCaminho.setText(url);
-			analisar(url);
+			analisarPath(url);
 		}
 	}
 	
-	private void analisar(String path) {
+	private void setModel(Interpretador interpretador) {
+		Tag[] tags =  interpretador.getTags();
+		tableModel = new TagTableModel(tags);
+		table.setModel(tableModel);	
+	}
+	
+	private void analisarPath(String path) {
 		try {
-			Interpretador interpretador = new Interpretador(path);
+			Interpretador interpretador = new Interpretador();
+			interpretador.setPath(path);
 			textArea.setText("O arquivo está bem formatado.");
-			
-			Tag[] tags =  interpretador.getTags();
-			tableModel = new TagTableModel(tags);
-			table.setModel(tableModel);	
+			setModel(interpretador);
+
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(this, "Ocorreu um erro ao tentar abrir o arquivo.", "ERRO", JOptionPane.ERROR_MESSAGE);
 		} catch (HTMLInvalidFile e) {
@@ -92,6 +100,40 @@ public class Main extends JFrame {
 			textArea.setText(e.getMessage());
 			table.setModel(new DefaultTableModel());
 		} 
+	}
+	
+	private void analisarFile(String file) {
+		try {
+			Interpretador interpretador = new Interpretador();
+			interpretador.setFile(file);
+			textArea.setText("O arquivo está bem formatado.");
+			
+			setModel(interpretador);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, "Ocorreu um erro ao tentar abrir o arquivo.", "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (HTMLInvalidFile e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (HTMLSyntaxException e) {
+			textArea.setText(e.getMessage());
+			table.setModel(new DefaultTableModel());
+		} 
+	}
+	
+	private void digitar() {
+		DialogDigitar dialog = new DialogDigitar(this);
+		dialog.setVisible(true);
+		dialog.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				if (dialog.getOpcao() == 1) {
+					String text = dialog.getText();
+					if(text == null) {
+						text = "";
+					}
+					analisarFile(text);
+				}
+			}
+		});
 	}
 
 	/**
@@ -158,18 +200,31 @@ public class Main extends JFrame {
 		gbc_panel02.gridy = 1;
 		contentPane.add(panel02, gbc_panel02);
 		GridBagLayout gbl_panel02 = new GridBagLayout();
-		gbl_panel02.columnWidths = new int[]{0, 0, 0};
+		gbl_panel02.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel02.rowHeights = new int[]{0, 0};
-		gbl_panel02.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel02.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel02.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel02.setLayout(gbl_panel02);
+		
+		btnDigitar = new JButton("Digitar");
+		btnDigitar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				digitar();
+			}
+		});
+		btnDigitar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		GridBagConstraints gbc_btnDigitar = new GridBagConstraints();
+		gbc_btnDigitar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnDigitar.gridx = 1;
+		gbc_btnDigitar.gridy = 0;
+		panel02.add(btnDigitar, gbc_btnDigitar);
 		
 		btnSelecionar = new JButton("Selecionar arquivo");
 		btnSelecionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GridBagConstraints gbc_btnSelecionar = new GridBagConstraints();
-		gbc_btnSelecionar.anchor = GridBagConstraints.EAST;
 		gbc_btnSelecionar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnSelecionar.gridx = 0;
+		gbc_btnSelecionar.anchor = GridBagConstraints.EAST;
+		gbc_btnSelecionar.gridx = 2;
 		gbc_btnSelecionar.gridy = 0;
 		panel02.add(btnSelecionar, gbc_btnSelecionar);
 		btnSelecionar.addActionListener(new ActionListener() {
@@ -181,12 +236,12 @@ public class Main extends JFrame {
 		btnAnalisar = new JButton("Analisar");
 		btnAnalisar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GridBagConstraints gbc_btnAnalisar = new GridBagConstraints();
-		gbc_btnAnalisar.gridx = 1;
+		gbc_btnAnalisar.gridx = 3;
 		gbc_btnAnalisar.gridy = 0;
 		panel02.add(btnAnalisar, gbc_btnAnalisar);
 		btnAnalisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				analisar(tfCaminho.getText());
+				analisarPath(tfCaminho.getText());
 			}
 		});
 		

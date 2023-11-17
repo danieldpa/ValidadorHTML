@@ -2,6 +2,7 @@ package validador;
 
 import ListaEncadeada.ListaEncadeada;
 import Pilha.PilhaLista;
+import arvore.Arvore;
 import ordenacoes.OrdenacaoQuickSort;
 
 import java.io.*;
@@ -13,16 +14,17 @@ public class Interpretador {
 	private String file;
 	private ListaEncadeada<Tag> tags;
 	private PilhaLista<String> pilha;
+	private Arvore<String> arvore;
 	private boolean valido;
 	
-	public Interpretador(String path) throws IOException, HTMLSyntaxException, HTMLInvalidFile {
+	public Interpretador() {
 		pilha = new PilhaLista<String>();
 		tags = new ListaEncadeada<Tag>();
-		analisar(path);
+		arvore = new Arvore<String>();
 	}
 	
 	private void lerArquivo(String path) throws IOException, HTMLInvalidFile {
-		if (!path.substring(path.length() - 5, path.length()).equalsIgnoreCase(".html")) {
+		if (!path.endsWith(".html")) {
 			throw new HTMLInvalidFile(path);
 		}
 		
@@ -30,8 +32,15 @@ public class Interpretador {
 		file = new String(encoded, Charset.defaultCharset());
 	}
 	
-	private void analisar(String path) throws IOException, HTMLSyntaxException, HTMLInvalidFile {
+	public void setPath(String path) throws IOException, HTMLSyntaxException, HTMLInvalidFile {
 		lerArquivo(path);
+		lerTodasTags();
+		
+		valido = true;
+	}
+	
+	public void setFile(String file) throws IOException, HTMLSyntaxException, HTMLInvalidFile {
+		this.file = file;
 		lerTodasTags();
 		
 		valido = true;
@@ -160,5 +169,9 @@ public class Interpretador {
         
         return quickSort.getInfo();
     }
+	
+	public Arvore<String> getArvore() {
+		return arvore;
+	}
 	
 }
